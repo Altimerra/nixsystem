@@ -18,6 +18,9 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    ./shell
+    ./gnome
+    ./programs
   ];
 
   nixpkgs = {
@@ -67,139 +70,7 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
 
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
-
-    "org/gnome/shell" = {
-      disable-user-extensions = false;
-
-      # `gnome-extensions list` for a list
-      enabled-extensions = [
-        "pano@elhan.io"
-        "espresso@coadmunkee.github.com"
-        "forge@jmmaranan.com"
-      ];
-
-      disabled-extensions = [];
-    };
-  };
-
-  home.packages = with pkgs;
-    (with unstable; [
-      btop
-      alejandra
-      firefox
-      chromium
-      typst
-      logseq
-      pandoc
-      obsidian
-      zotero
-      sioyek
-      telegram-desktop
-      whatsapp-for-linux
-      thunderbird
-      bitwarden
-      typst-lsp
-      cmus
-      lf
-      broot
-      eza
-      zathura
-      yt-dlp
-      yazi
-      wget
-      (nerdfonts.override {fonts = ["JetBrainsMono"];})
-    ])
-    ++ [
-      gnomeExtensions.pano
-      gnomeExtensions.espresso
-      gnomeExtensions.forge
-      gnomeExtensions.appindicator
-    ];
   fonts.fontconfig.enable = true;
-  programs = {
-    zoxide = {
-      enable = true;
-      package = pkgs.unstable.zoxide;
-    };
-    starship = {
-      enable = true;
-      package = pkgs.unstable.starship;
-    };
-    alacritty = {
-      enable = true;
-      settings = {
-        font.normal.family = "JetBrainsMonoNerdFont";
-        font.normal.style = "Regular";
-      };
-    };
-    neovim = {
-      enable = true;
-      #package = pkgs.unstable.neovim;
-      defaultEditor = true;
-      plugins = with pkgs.vimPlugins; [
-        lightline-vim
-        vim-startify
-        tokyonight-nvim
-      ];
-      extraConfig = ''
-        set number
-        set relativenumber
-      '';
-      extraLuaConfig = ''
-        vim.cmd[[colorscheme tokyonight-night]]
-      '';
-    };
-
-    fish = {
-      enable = true;
-      package = pkgs.unstable.fish;
-    };
-    nushell = {
-      enable = true;
-      package = pkgs.nushell;
-    };
-    zellij = {
-      enable = true;
-      package = pkgs.unstable.zellij;
-      enableFishIntegration = true;
-    };
-
-    vscode = {
-      enable = true;
-      package = pkgs.unstable.vscodium;
-      extensions = with pkgs.vscode-extensions; [
-        kamadorueda.alejandra
-        jnoortheen.nix-ide
-        nvarner.typst-lsp
-        tomoki1207.pdf
-      ];
-    };
-
-    mpv = {
-      enable = true;
-      #package = pkgs.unstable.mpv;
-      scripts = with pkgs.mpvScripts; [uosc];
-      config = {
-        profile = "gpu-hq";
-        scale = "ewa_lanczossharp";
-        cscale = "ewa_lanczossharp";
-        video-sync = "display-resample";
-        interpolation = "true";
-        tscale = "oversample";
-      };
-    };
-
-    git = {
-      enable = true;
-      package = pkgs.unstable.git;
-      userName = "Harindu Bandara";
-      userEmail = "harindudb@gmail.com";
-    };
-  };
 
   services = {
     syncthing = {
