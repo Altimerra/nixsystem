@@ -39,6 +39,11 @@
     gthumb
     julia-bin
     bottles
+    qMasterPassword
+    spectre-cli
+    music-player
+    termusic
+    junction
   ];
 
   programs = {
