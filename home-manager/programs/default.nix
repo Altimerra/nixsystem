@@ -8,6 +8,7 @@
     alejandra
     firefox
     chromium
+    vlc
     typst
     logseq
     pandoc
