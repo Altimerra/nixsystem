@@ -32,6 +32,8 @@
     imagemagick
     yazi
     wget
+    unar
+    restic
     (nerdfonts.override {fonts = ["JetBrainsMono"];})
 
     gimp

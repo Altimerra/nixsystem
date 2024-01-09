@@ -8,6 +8,7 @@
     l = "eza";
     ll = "eza -l";
     led = "hledger -f ~/Data/Briefcase/Finance/hledger.journal";
+    yt = "yt-dlp -S res:1080,vcodec:av01,vcodec:avc,acodec:opus,acodec:aac";
   };
 
   programs = {
@@ -54,7 +55,7 @@
           let $config = {
           }
 
-          def yt [link?: string] {
+          def ytd [link?: string] {
             if ($link == null) {
               yt-dlp -S res:1080,vcodec:av01,vcodec:avc,acodec:opus,acodec:aac -a "download.txt"
             } else {
